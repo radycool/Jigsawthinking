@@ -1,0 +1,275 @@
+/* Hero2.css - Fixed to match reference image */
+
+.hero2-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Background Image Styles */
+.hero2-background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+/* Background Video Styles */
+.hero2-background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.hero2-background-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Overlay with gradient matching reference image */
+.hero2-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg, 
+    rgba(139, 69, 19, 0.7) 0%, 
+    rgba(160, 82, 45, 0.6) 25%, 
+    rgba(205, 133, 63, 0.5) 50%, 
+    rgba(222, 184, 135, 0.4) 75%, 
+    rgba(245, 222, 179, 0.3) 100%
+  );
+  z-index: 2;
+}
+
+/* Content Wrapper */
+.hero2-content-wrapper {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  padding: 40px;
+}
+
+/* Content Positioning Classes */
+.hero2-content-wrapper.content-position-top-left {
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.hero2-content-wrapper.content-position-top-center {
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.hero2-content-wrapper.content-position-top-right {
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.hero2-content-wrapper.content-position-center-left {
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.hero2-content-wrapper.content-position-center-center {
+  align-items: center;
+  justify-content: center;
+}
+
+.hero2-content-wrapper.content-position-center-right {
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.hero2-content-wrapper.content-position-bottom-left {
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.hero2-content-wrapper.content-position-bottom-center {
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.hero2-content-wrapper.content-position-bottom-right {
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+/* Content Container */
+.hero2-content {
+  max-width: 900px;
+  padding: 60px 40px;
+  width: 100%;
+}
+
+/* Text Alignment */
+.hero2-content.text-left {
+  text-align: left;
+}
+
+.hero2-content.text-center {
+  text-align: center;
+}
+
+.hero2-content.text-right {
+  text-align: right;
+}
+
+/* Main Heading - Matching reference image style */
+.hero2-heading {
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 900;
+  line-height: 1.1;
+  color: #ffffff;
+  margin: 0 0 15px 0;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+  word-spacing: 0.3em;
+}
+
+/* Subheading - Matching reference image style */
+.hero2-subheading {
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: #ffffff;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+  word-spacing: 0.2em;
+}
+
+/* Special styling for the em dash in subheading */
+.hero2-subheading::before {
+  content: "";
+  display: inline-block;
+  width: 60px;
+  height: 3px;
+  background: #ffffff;
+  margin-right: 15px;
+  margin-bottom: 8px;
+  vertical-align: middle;
+}
+
+/* Alternative approach - if the dash is in the text content */
+.hero2-subheading {
+  position: relative;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .hero2-content {
+    padding: 50px 30px;
+    max-width: 800px;
+  }
+  
+  .hero2-heading {
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    letter-spacing: 1.2px;
+  }
+  
+  .hero2-subheading {
+    font-size: clamp(1.8rem, 4.5vw, 3rem);
+    letter-spacing: 1px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero2-content-wrapper {
+    padding: 20px;
+  }
+  
+  .hero2-content {
+    padding: 40px 20px;
+  }
+  
+  .hero2-heading {
+    font-size: clamp(1.8rem, 7vw, 2.8rem);
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  
+  .hero2-subheading {
+    font-size: clamp(1.4rem, 5.5vw, 2.2rem);
+    letter-spacing: 0.8px;
+  }
+  
+  .hero2-subheading::before {
+    width: 40px;
+    margin-right: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero2-container {
+    min-height: 80vh;
+  }
+  
+  .hero2-content {
+    padding: 30px 15px;
+  }
+  
+  .hero2-heading {
+    font-size: clamp(1.5rem, 8vw, 2.2rem);
+    line-height: 1.2;
+  }
+  
+  .hero2-subheading {
+    font-size: clamp(1.2rem, 6vw, 1.8rem);
+  }
+  
+  .hero2-subheading::before {
+    width: 30px;
+    height: 2px;
+    margin-right: 8px;
+  }
+}
+
+/* Animation for content entrance */
+.hero2-content {
+  animation: fadeInUp 1.2s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover effects for interactive elements */
+.hero2-content:hover .hero2-heading {
+  transform: translateY(-2px);
+  transition: transform 0.3s ease;
+}
+
+.hero2-content:hover .hero2-subheading {
+  transform: translateY(-1px);
+  transition: transform 0.3s ease;
+}
