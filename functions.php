@@ -528,8 +528,8 @@ add_action('wp_enqueue_scripts', 'hero2_enqueue_styles');
 
 // Register the Hero2 Widget with Elementor
 function register_hero2_widget($widgets_manager) {
-    require_once( get_stylesheet_directory() . '/includes/elementor-Hero2-widget.php' ); // adjust path to match your child theme folder
-    $widgets_manager->register( new \Elementor_Hero2_Widget() );
+    require_once( get_stylesheet_directory() . '/includes/elementor-hero2-widget.php'); // adjust path to match your child theme folder
+    $widgets_manager->register(new \Elementor_Hero2_Widget() );
 }
 add_action('elementor/widgets/register', 'register_hero2_widget');
 
