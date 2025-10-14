@@ -252,51 +252,24 @@ function register_testimonials_elementor_widget() {
 }
 add_action('elementor/widgets/widgets_registered', 'register_testimonials_elementor_widget');
 
-// Register and enqueue FAQ assets
+// Enqueue FAQ assets
 function enqueue_faq_assets() {
-    // Enqueue FAQ CSS - use get_stylesheet_directory_uri() for child themes
-    wp_enqueue_style(
-        'faq-style',
-        get_stylesheet_directory_uri() . '/assets/css/faq.css', // Child theme path
-        [],
-        '1.0.0'
-    );
-    
-    // Enqueue FAQ JavaScript - use get_stylesheet_directory_uri() for child themes
-    wp_enqueue_script(
-        'faq-script',
-        get_stylesheet_directory_uri() . '/assets/js/faq.js', // Child theme path
-        ['jquery'], // Add jQuery as dependency if needed
-        '1.0.0',
-        true
-    );
+    wp_enqueue_style('faq-style', get_stylesheet_directory_uri() . '/assets/css/faq.css', [], '1.0.0');
+    wp_enqueue_script('faq-script', get_stylesheet_directory_uri() . '/assets/js/faq.js', ['jquery'], '1.0.0', true);
 }
 add_action('wp_enqueue_scripts', 'enqueue_faq_assets');
 
 // Register Elementor FAQ Widget
-function register_faq_elementor_widget() {
-    // Check if Elementor is active
-    if (!did_action('elementor/loaded')) {
-        return;
-    }
-    
-    // Include the widget file - use get_stylesheet_directory() for child themes
+function register_faq_elementor_widget( $widgets_manager ) {
     $widget_file = get_stylesheet_directory() . '/includes/elementor-FAQ-widget.php';
-    
-    // Check if file exists before requiring
     if (file_exists($widget_file)) {
         require_once $widget_file;
-        
-        // Register the widget
-        \Elementor\Plugin::instance()->widgets_manager->register_widget_type(new Elementor_FAQ_Widget());
+        $widgets_manager->register(new Elementor_FAQ_Widget());
     } else {
-        // Show admin notice if file is missing
-        add_action('admin_notices', function() use ($widget_file) {
-            echo '<div class="notice notice-error"><p><strong>FAQ Widget Error:</strong> Widget file not found at: ' . esc_html($widget_file) . '</p></div>';
-        });
+        error_log('FAQ Widget file missing: ' . $widget_file);
     }
 }
-add_action('elementor/widgets/widgets_registered', 'register_faq_elementor_widget');
+add_action('elementor/widgets/register', 'register_faq_elementor_widget');
 
 // Add Elementor Widget Categories
 function add_custom_elementor_widget_categories($elements_manager) {

@@ -588,10 +588,11 @@ class Elementor_Hero1_Widget extends \Elementor\Widget_Base {
             ]
         );
 
+        // ✅ UPDATED: Unique border control name
         $this->add_group_control(
             \Elementor\Group_Control_Border::get_type(),
             [
-                'name' => 'button_border',
+                'name' => 'hero1_btn_border',  // Changed from 'button_border'
                 'selector' => '{{WRAPPER}} .hero1-button',
             ]
         );
@@ -819,7 +820,8 @@ class Elementor_Hero1_Widget extends \Elementor\Widget_Base {
             object-position: center !important;
         }
         
-        #<?php echo esc_attr($widget_id); ?> .hero1-overlay {
+        #<?php echo
+        esc_attr($widget_id); ?> .hero1-overlay {
             position: absolute !important;
             top: 0 !important;
             left: 0 !important;
@@ -994,7 +996,7 @@ class Elementor_Hero1_Widget extends \Elementor\Widget_Base {
         // Enqueue CSS
         wp_enqueue_style(
             'hero1-style',
-            plugin_dir_url(__FILE__) . '../hero1.css',
+            get_stylesheet_directory_uri() . '/hero1.css',
             [],
             '1.0.0'
         );
@@ -1002,7 +1004,7 @@ class Elementor_Hero1_Widget extends \Elementor\Widget_Base {
         // Enqueue JavaScript
         wp_enqueue_script(
             'hero1-script',
-            plugin_dir_url(__FILE__) . '../hero1.js',
+            get_stylesheet_directory_uri() . '/hero1.js',
             [],
             '1.0.0',
             true
@@ -1108,5 +1110,4 @@ class Elementor_Hero1_Widget extends \Elementor\Widget_Base {
         <?php
     }
 }
-
 ?>
