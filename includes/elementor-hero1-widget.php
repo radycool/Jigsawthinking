@@ -545,17 +545,6 @@ class Elementor_Hero1_Widget extends \Elementor\Widget_Base {
             ]
         );
 
-        $this->add_control(
-            'button_border_color',
-            [
-                'label' => esc_html__('Border Color', 'textdomain'),
-                'type' => \Elementor\Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .hero1-button' => 'border-color: {{VALUE}}',
-                ],
-            ]
-        );
-
         $this->end_controls_tab();
 
         $this->start_controls_tab(
@@ -583,17 +572,6 @@ class Elementor_Hero1_Widget extends \Elementor\Widget_Base {
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .hero1-button:hover' => 'background-color: {{VALUE}}',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'button_hover_border_color',
-            [
-                'label' => esc_html__('Border Color', 'textdomain'),
-                'type' => \Elementor\Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .hero1-button:hover' => 'border-color: {{VALUE}}',
                 ],
             ]
         );

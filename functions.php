@@ -735,6 +735,8 @@ add_action( 'elementor/widgets/register', function( $widgets_manager ) {
 // -------------------------
 //  Showcase Widget
 // -------------------------
+if ( ! class_exists( 'Elementor_Showcase_Widget' ) ) {
+    class Elementor_Showcase_Widget extends \Elementor\Widget_Base {
 add_action( 'elementor/widgets/register', function( $widgets_manager ) {
     require_once get_stylesheet_directory() . '/includes/showcase-widget.php';
     $widgets_manager->register( new \Elementor_Showcase_Widget() );
