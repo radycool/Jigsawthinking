@@ -500,13 +500,11 @@ function faq_admin_notice_missing_elementor() {
 }
 
 // Register Hero1 Elementor Widget
-function register_hero1_elementor_widget() {
-    if (!did_action('elementor/loaded')) {
-        return;
-    }
+function register_hero1_elementor_widget( $widgets_manager ) {
     require_once get_stylesheet_directory() . '/includes/elementor-hero1-widget.php';
+    $widgets_manager->register( new \Elementor_Hero1_Widget() );
 }
-add_action('elementor/widgets/widgets_registered', 'register_hero1_elementor_widget');
+add_action('elementor/widgets/register', 'register_hero1_elementor_widget');
 
 // Enqueue Hero1 Assets  
 function enqueue_hero1_assets() {
