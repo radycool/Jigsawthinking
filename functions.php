@@ -560,6 +560,13 @@ function register_scroll_reveal_widget() {
 }
 add_action('elementor/widgets/register', 'register_scroll_reveal_widget');
 
+// Register Scroll Reveal 2 Widget
+function register_Scroll_Reveal2_widget() {
+    require_once get_stylesheet_directory() . '/includes/elementor-Scroll-Reveal2-widget.php';
+    \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \Elementor_Scroll_Reveal2_Widget() );
+}
+add_action('elementor/widgets/register', 'register_Scroll_Reveal2_widget');
+
 // ✅ Register Timeline Reveal Widget
 function register_timeline_reveal_widget( $widgets_manager ) {
     require_once get_stylesheet_directory() . '/includes/Elementor-TimelineReveal-widget.php';
@@ -734,6 +741,7 @@ add_action( 'elementor/widgets/register', function( $widgets_manager ) {
     require_once get_stylesheet_directory() . '/includes/quiz-widget.php';
     $widgets_manager->register( new \Elementor_Quiz_Widget() );
 });
+
 // CSS & JS inside widget itself
 
 // -------------------------
