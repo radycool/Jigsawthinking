@@ -1109,7 +1109,4 @@ class Elementor_Hero1_Widget extends \Elementor\Widget_Base {
     }
 }
 
-// Register the widget
-\Elementor\Plugin::instance()->widgets_manager->register_widget_type(new Elementor_Hero1_Widget());
-
 ?>
