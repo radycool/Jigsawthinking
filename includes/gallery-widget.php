@@ -3,14 +3,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 class Elementor_Gallery_Widget extends \Elementor\Widget_Base {
 
-    public function get_script_depends() {
-        return [];
-    }
-
-    public function get_style_depends() {
-        return [];
-    }
-
     public function get_name() {
         return 'gallery';
     }
@@ -24,11 +16,7 @@ class Elementor_Gallery_Widget extends \Elementor\Widget_Base {
     }
 
     public function get_categories() {
-        return [ 'basic' ];
-    }
-    
-    public function get_keywords() {
-        return [ 'gallery', 'image', 'grid', 'photos' ];
+        return [ 'general' ];
     }
 
     protected function register_controls() {
