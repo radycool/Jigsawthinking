@@ -783,32 +783,32 @@ add_action( 'elementor/widgets/register', function( $widgets_manager ) {
 });
 // CSS/JS is inside widget itself
 
-// Gallery Widget Registration with Debug
-// -------------------------
-add_action( 'elementor/widgets/register', function( $widgets_manager ) {
-    
-    // Check if file exists
+add_action( 'elementor/widgets/register', 'register_custom_gallery_widget' );
+function register_custom_gallery_widget( $widgets_manager ) {
+
     $file_path = get_stylesheet_directory() . '/includes/gallery-widget.php';
-    
     if ( ! file_exists( $file_path ) ) {
-        // If using child theme and file is in parent theme
         $file_path = get_template_directory() . '/includes/gallery-widget.php';
     }
-    
+
     if ( file_exists( $file_path ) ) {
         require_once $file_path;
-        
+
         if ( class_exists( 'Elementor_Gallery_Widget' ) ) {
-            $widgets_manager->register( new \Elementor_Gallery_Widget() );
+            $widgets_manager->register( new Elementor_Gallery_Widget() );
+        } else {
+            add_action( 'admin_notices', function() {
+                echo '<div class="notice notice-error"><p>Gallery widget class not found.</p></div>';
+            });
         }
+
     } else {
-        // Debug: Show admin notice if file not found
         add_action( 'admin_notices', function() use ( $file_path ) {
             echo '<div class="notice notice-error"><p>Gallery widget file not found at: ' . esc_html( $file_path ) . '</p></div>';
         });
     }
-    
-}, 10, 1 );
+}
+
 
 // CSS/JS is inside widget itself
 
