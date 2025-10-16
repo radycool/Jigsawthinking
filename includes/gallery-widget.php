@@ -1,6 +1,11 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+// Check if Elementor is loaded
+if ( ! did_action( 'elementor/loaded' ) ) {
+    return;
+}
+
 class Elementor_Gallery_Widget extends \Elementor\Widget_Base {
 
     public function get_script_depends() {
@@ -12,11 +17,11 @@ class Elementor_Gallery_Widget extends \Elementor\Widget_Base {
     }
 
     public function get_name() {
-        return 'gallery';
+        return 'custom_gallery_grid';
     }
 
     public function get_title() {
-        return __( 'Gallery Grid', 'text-domain' );
+        return esc_html__( 'Custom Gallery Grid', 'text-domain' );
     }
 
     public function get_icon() {
