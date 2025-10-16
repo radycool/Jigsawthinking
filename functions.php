@@ -783,13 +783,13 @@ add_action( 'elementor/widgets/register', function( $widgets_manager ) {
 });
 // CSS/JS is inside widget itself
 
-// -------------------------
 // Gallery Widget
 // -------------------------
 add_action( 'elementor/widgets/register', function( $widgets_manager ) {
     require_once get_stylesheet_directory() . '/includes/gallery-widget.php';
     $widgets_manager->register( new \Elementor_Gallery_Widget() );
 });
+
 // CSS/JS is inside widget itself
 
 

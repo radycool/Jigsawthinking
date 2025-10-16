@@ -383,6 +383,7 @@ class Elementor_Quiz_Widget extends \Elementor\Widget_Base {
             return;
         }
 
+        $widget_id = $this->get_id();
         $quiz_data = [
             'questions' => $settings['questions'],
             'show_score' => $settings['show_score'],
@@ -391,14 +392,245 @@ class Elementor_Quiz_Widget extends \Elementor\Widget_Base {
             'fail_message' => $settings['fail_message'],
             'passing_score' => $settings['passing_score'],
         ];
-        
-        // Inline CSS
-        $this->add_inline_style();
-        
-        // Inline JavaScript
-        $this->add_inline_script();
         ?>
-        <div class="quiz-container" data-quiz='<?php echo esc_attr( json_encode( $quiz_data ) ); ?>'>
+        
+        <style>
+        .quiz-container-<?php echo $widget_id; ?> {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .quiz-container-<?php echo $widget_id; ?> .quiz-header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .quiz-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .quiz-description {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.5;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .quiz-progress {
+            margin-bottom: 30px;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50 0%, #45a049 100%);
+            transition: width 0.3s ease;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .progress-text {
+            display: block;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .quiz-question {
+            margin-bottom: 30px;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .question-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .answers-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .answer-option {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .answer-option:hover {
+            background: #e8f5e9;
+            border-color: #4CAF50;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .answer-option input[type="radio"],
+        .quiz-container-<?php echo $widget_id; ?> .answer-option input[type="checkbox"] {
+            margin-right: 12px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .answer-option input:checked ~ .answer-text {
+            font-weight: 600;
+            color: #4CAF50;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .answer-option:has(input:checked) {
+            background: #e8f5e9;
+            border-color: #4CAF50;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .answer-text {
+            font-size: 16px;
+            color: #333;
+            line-height: 1.4;
+            flex: 1;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .quiz-navigation {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .quiz-button {
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            background: #4CAF50;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            flex: 1;
+            max-width: 200px;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .quiz-button:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+        .quiz-container-<?php echo $widget_id; ?> .btn-prev {
+            background: #757575;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .btn-prev:hover {
+            background: #616161;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .btn-submit {
+            background: #2196F3;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .btn-submit:hover {
+            background: #1976D2;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .quiz-results {
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .quiz-container-<?php echo $widget_id; ?> .results-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .result-message {
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 18px;
+            text-align: center;
+            line-height: 1.6;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .result-message.passed {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 2px solid #4CAF50;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .result-message.failed {
+            background: #ffebee;
+            color: #c62828;
+            border: 2px solid #f44336;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .score-display,
+        .quiz-container-<?php echo $widget_id; ?> .points-display {
+            font-size: 18px;
+            margin: 15px 0;
+            text-align: center;
+            color: #333;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .answers-review {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #e0e0e0;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .answers-review h4 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .question-review {
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #e0e0e0;
+            background: #f8f9fa;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .question-review.correct {
+            background: #e8f5e9;
+            border-left-color: #4CAF50;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .question-review.incorrect {
+            background: #ffebee;
+            border-left-color: #f44336;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .review-question {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .review-status {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .question-review.correct .review-status {
+            color: #2e7d32;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .question-review.incorrect .review-status {
+            color: #c62828;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .review-answers {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+            margin-top: 10px;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .btn-restart {
+            display: block;
+            margin: 30px auto 0;
+            background: #FF9800;
+        }
+        .quiz-container-<?php echo $widget_id; ?> .btn-restart:hover {
+            background: #F57C00;
+        }
+        @media (max-width: 768px) {
+            .quiz-container-<?php echo $widget_id; ?> { padding: 20px; }
+            .quiz-container-<?php echo $widget_id; ?> .quiz-title { font-size: 24px; }
+            .quiz-container-<?php echo $widget_id; ?> .question-text { font-size: 18px; }
+            .quiz-container-<?php echo $widget_id; ?> .quiz-navigation { flex-direction: column; }
+            .quiz-container-<?php echo $widget_id; ?> .quiz-button { max-width: 100%; width: 100%; }
+        }
+        </style>
+
+        <div class="quiz-container-<?php echo $widget_id; ?>" data-quiz='<?php echo esc_attr( json_encode( $quiz_data ) ); ?>'>
             <div class="quiz-header">
                 <h2 class="quiz-title"><?php echo esc_html( $settings['quiz_title'] ); ?></h2>
                 <?php if ( ! empty( $settings['quiz_description'] ) ) : ?>
@@ -427,7 +659,7 @@ class Elementor_Quiz_Widget extends \Elementor\Widget_Base {
                                 <label class="answer-option">
                                     <input 
                                         type="<?php echo $question['question_type'] === 'multiple' ? 'checkbox' : 'radio'; ?>" 
-                                        name="question_<?php echo $index; ?>" 
+                                        name="question_<?php echo $widget_id; ?>_<?php echo $index; ?>" 
                                         value="<?php echo $answer_index; ?>"
                                     >
                                     <span class="answer-text"><?php echo esc_html( $answer ); ?></span>
@@ -450,271 +682,14 @@ class Elementor_Quiz_Widget extends \Elementor\Widget_Base {
                 <button class="quiz-button btn-restart"><?php _e( 'Restart Quiz', 'text-domain' ); ?></button>
             </div>
         </div>
-        <?php
-    }
 
-    private function add_inline_style() {
-        ?>
-        <style>
-        .quiz-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 30px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        .quiz-header {
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        .quiz-title {
-            font-size: 28px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 10px;
-        }
-        .quiz-description {
-            font-size: 16px;
-            color: #666;
-            line-height: 1.5;
-        }
-        .quiz-progress {
-            margin-bottom: 30px;
-        }
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background-color: #e0e0e0;
-            border-radius: 4px;
-            overflow: hidden;
-            margin-bottom: 10px;
-        }
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #4CAF50 0%, #45a049 100%);
-            transition: width 0.3s ease;
-        }
-        .progress-text {
-            display: block;
-            text-align: center;
-            font-size: 14px;
-            color: #666;
-        }
-        .quiz-question {
-            margin-bottom: 30px;
-            animation: fadeIn 0.3s ease;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .question-text {
-            font-size: 20px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 20px;
-            line-height: 1.4;
-        }
-        .answers-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        .answer-option {
-            display: flex;
-            align-items: center;
-            padding: 15px 20px;
-            background: #f8f9fa;
-            border: 2px solid #e0e0e0;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        .answer-option:hover {
-            background: #e8f5e9;
-            border-color: #4CAF50;
-        }
-        .answer-option input[type="radio"],
-        .answer-option input[type="checkbox"] {
-            margin-right: 12px;
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-        }
-        .answer-option input[type="radio"]:checked ~ .answer-text,
-        .answer-option input[type="checkbox"]:checked ~ .answer-text {
-            font-weight: 600;
-            color: #4CAF50;
-        }
-        .answer-option:has(input:checked) {
-            background: #e8f5e9;
-            border-color: #4CAF50;
-        }
-        .answer-text {
-            font-size: 16px;
-            color: #333;
-            line-height: 1.4;
-            flex: 1;
-        }
-        .quiz-navigation {
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-            margin-top: 30px;
-        }
-        .quiz-button {
-            padding: 12px 30px;
-            font-size: 16px;
-            font-weight: 600;
-            color: #fff;
-            background: #4CAF50;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            flex: 1;
-            max-width: 200px;
-        }
-        .quiz-button:hover {
-            background: #45a049;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
-        }
-        .quiz-button:active {
-            transform: translateY(0);
-        }
-        .btn-prev {
-            background: #757575;
-        }
-        .btn-prev:hover {
-            background: #616161;
-        }
-        .btn-submit {
-            background: #2196F3;
-        }
-        .btn-submit:hover {
-            background: #1976D2;
-        }
-        .quiz-results {
-            animation: fadeIn 0.5s ease;
-        }
-        .results-title {
-            font-size: 24px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .result-message {
-            padding: 20px;
-            border-radius: 6px;
-            margin-bottom: 20px;
-            font-size: 18px;
-            text-align: center;
-            line-height: 1.6;
-        }
-        .result-message.passed {
-            background: #e8f5e9;
-            color: #2e7d32;
-            border: 2px solid #4CAF50;
-        }
-        .result-message.failed {
-            background: #ffebee;
-            color: #c62828;
-            border: 2px solid #f44336;
-        }
-        .score-display, .points-display {
-            font-size: 18px;
-            margin: 15px 0;
-            text-align: center;
-            color: #333;
-        }
-        .score-display strong, .points-display strong {
-            color: #4CAF50;
-        }
-        .answers-review {
-            margin-top: 30px;
-            padding-top: 30px;
-            border-top: 2px solid #e0e0e0;
-        }
-        .answers-review h4 {
-            font-size: 20px;
-            color: #333;
-            margin-bottom: 20px;
-        }
-        .question-review {
-            padding: 20px;
-            margin-bottom: 15px;
-            border-radius: 6px;
-            border-left: 4px solid #e0e0e0;
-            background: #f8f9fa;
-        }
-        .question-review.correct {
-            background: #e8f5e9;
-            border-left-color: #4CAF50;
-        }
-        .question-review.incorrect {
-            background: #ffebee;
-            border-left-color: #f44336;
-        }
-        .review-question {
-            font-size: 16px;
-            color: #333;
-            margin-bottom: 10px;
-            line-height: 1.5;
-        }
-        .review-status {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-        .question-review.correct .review-status {
-            color: #2e7d32;
-        }
-        .question-review.incorrect .review-status {
-            color: #c62828;
-        }
-        .review-answers {
-            font-size: 14px;
-            color: #555;
-            line-height: 1.6;
-            margin-top: 10px;
-        }
-        .review-answers strong {
-            color: #333;
-        }
-        .btn-restart {
-            display: block;
-            margin: 30px auto 0;
-            background: #FF9800;
-        }
-        .btn-restart:hover {
-            background: #F57C00;
-        }
-        @media (max-width: 768px) {
-            .quiz-container { padding: 20px; }
-            .quiz-title { font-size: 24px; }
-            .question-text { font-size: 18px; }
-            .answer-text { font-size: 15px; }
-            .quiz-navigation { flex-direction: column; }
-            .quiz-button { max-width: 100%; width: 100%; }
-            .result-message { font-size: 16px; }
-        }
-        </style>
-        <?php
-    }
-
-    private function add_inline_script() {
-        ?>
         <script>
         jQuery(document).ready(function($) {
-            $('.quiz-container').each(function() {
+            $('.quiz-container-<?php echo $widget_id; ?>').each(function() {
                 const container = $(this);
                 const quizData = container.data('quiz');
                 let currentQuestion = 0;
                 let userAnswers = {};
-                let score = 0;
 
                 const totalQuestions = quizData.questions.length;
                 const questions = container.find('.quiz-question');
@@ -733,21 +708,9 @@ class Elementor_Quiz_Widget extends \Elementor\Widget_Base {
 
                 function showQuestion(index) {
                     questions.hide().eq(index).show();
-                    
-                    if (index === 0) {
-                        btnPrev.hide();
-                    } else {
-                        btnPrev.show();
-                    }
-
-                    if (index === totalQuestions - 1) {
-                        btnNext.hide();
-                        btnSubmit.show();
-                    } else {
-                        btnNext.show();
-                        btnSubmit.hide();
-                    }
-
+                    btnPrev.toggle(index > 0);
+                    btnNext.toggle(index < totalQuestions - 1);
+                    btnSubmit.toggle(index === totalQuestions - 1);
                     updateProgress();
                 }
 
@@ -756,10 +719,9 @@ class Elementor_Quiz_Widget extends \Elementor\Widget_Base {
                     const questionType = question.find('.answers-list').data('type');
                     
                     if (questionType === 'multiple') {
-                        const checked = question.find('input:checked').map(function() {
+                        userAnswers[questionIndex] = question.find('input:checked').map(function() {
                             return parseInt($(this).val());
                         }).get();
-                        userAnswers[questionIndex] = checked;
                     } else {
                         const checked = question.find('input:checked').val();
                         userAnswers[questionIndex] = checked !== undefined ? [parseInt(checked)] : [];
@@ -767,13 +729,11 @@ class Elementor_Quiz_Widget extends \Elementor\Widget_Base {
                 }
 
                 function calculateScore() {
-                    score = 0;
                     let totalPoints = 0;
                     let earnedPoints = 0;
 
                     quizData.questions.forEach((question, index) => {
                         totalPoints += parseInt(question.points) || 1;
-                        
                         const correctAnswers = question.correct_answers.split(',').map(a => parseInt(a.trim())).sort();
                         const userAnswerArray = (userAnswers[index] || []).sort();
                         
@@ -782,7 +742,7 @@ class Elementor_Quiz_Widget extends \Elementor\Widget_Base {
                         }
                     });
 
-                    score = totalPoints > 0 ? Math.round((earnedPoints / totalPoints) * 100) : 0;
+                    const score = totalPoints > 0 ? Math.round((earnedPoints / totalPoints) * 100) : 0;
                     return { score, earnedPoints, totalPoints };
                 }
 
@@ -841,7 +801,6 @@ class Elementor_Quiz_Widget extends \Elementor\Widget_Base {
                 function restartQuiz() {
                     currentQuestion = 0;
                     userAnswers = {};
-                    score = 0;
                     
                     container.find('input[type="radio"], input[type="checkbox"]').prop('checked', false);
                     container.find('.quiz-results').hide();
