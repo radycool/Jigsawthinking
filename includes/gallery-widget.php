@@ -1,42 +1,19 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-// Check if Elementor is loaded
-if ( ! did_action( 'elementor/loaded' ) ) {
-    return;
-}
+if ( ! did_action( 'elementor/loaded' ) ) return;
 
 class Elementor_Gallery_Widget extends \Elementor\Widget_Base {
 
-    public function get_script_depends() {
-        return [];
-    }
+    public function get_name() { return 'custom_gallery_grid'; }
+    public function get_title() { return esc_html__( 'Custom Gallery Grid', 'text-domain' ); }
+    public function get_icon() { return 'eicon-gallery-grid'; }
+    public function get_categories() { return ['general']; } // Use general
+    public function get_keywords() { return ['gallery','image','grid','photos']; }
+    public function get_script_depends() { return []; }
+    public function get_style_depends() { return []; }
 
-    public function get_style_depends() {
-        return [];
-    }
-
-    public function get_name() {
-        return 'custom_gallery_grid';
-    }
-
-    public function get_title() {
-        return esc_html__( 'Custom Gallery Grid', 'text-domain' );
-    }
-
-    public function get_icon() {
-        return 'eicon-gallery-grid';
-    }
-
-    public function get_categories() {
-        return [ 'basic' ];
-    }
-    
-    public function get_keywords() {
-        return [ 'gallery', 'image', 'grid', 'photos' ];
-    }
-
-    protected function register_controls() {
+    protected function _register_controls() {
         
         // Content Section
         $this->start_controls_section(
