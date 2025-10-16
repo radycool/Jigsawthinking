@@ -1,0 +1,31 @@
+[Oct 14 22:11:15] 
+[Oct 14 22:11:15] ==DUPLICATOR INSTALLER BOOTSTRAP v1.5.13.3==
+[Oct 14 22:11:15] ----------------------------------------------------
+[Oct 14 22:11:15] Installer bootstrap start
+[Oct 14 22:11:15] Manual extract found so not going to extract dup-installer dir
+[Oct 14 22:11:15] EXTRACT dup-installer dir
+[Oct 14 22:11:15] NOTICE: Didn't need to extract the installer.
+[Oct 14 22:11:15] [PHP ERR][ISSUE] MSG:Creation of dynamic property DUPX_Bootstrap::$archive is deprecated [CODE:8192|FILE:/var/www/wordpress/installer.php|LINE:530]
+[Oct 14 22:11:15] [PHP ERR][ISSUE] MSG:Creation of dynamic property DUPX_Bootstrap::$bootloader is deprecated [CODE:8192|FILE:/var/www/wordpress/installer.php|LINE:531]
+[Oct 14 22:11:15] Set permissions of dup-installer<br/>
+[Oct 14 22:11:15] Set permissions of dup-installer/addons<br/>
+[Oct 14 22:11:15] Set permissions of dup-installer/assets<br/>
+[Oct 14 22:11:15] Set permissions of dup-installer/classes<br/>
+[Oct 14 22:11:15] Set permissions of dup-installer/ctrls<br/>
+[Oct 14 22:11:15] Set permissions of dup-installer/favicon<br/>
+[Oct 14 22:11:15] Set permissions of dup-installer/libs<br/>
+[Oct 14 22:11:15] Set permissions of dup-installer/original_files_[HASH]<br/>
+[Oct 14 22:11:15] Set permissions of dup-installer/src<br/>
+[Oct 14 22:11:15] Set permissions of dup-installer/templates<br/>
+[Oct 14 22:11:15] Set permissions of dup-installer/vendor<br/>
+[Oct 14 22:11:15] Set permissions of dup-installer/dup-archive__[HASH].txt<br/>
+[Oct 14 22:11:15] Set permissions of dup-installer/dup-installer-csrf__[HASH].txt<br/>
+[Oct 14 22:11:15] Set permissions of dup-installer/dup-installer-notices__[HASH].json<br/>
+[Oct 14 22:11:15] Set permissions of dup-installer/dup-params__[HASH].json<br/>
+[Oct 14 22:11:15] Set permissions of dup-installer/dup-scan__[HASH].json<br/>
+[Oct 14 22:11:15] Set permissions of dup-installer/dup-scanned-dirs__[HASH].txt<br/>
+[Oct 14 22:11:15] Set permissions of dup-installer/dup-scanned-files__[HASH].txt<br/>
+[Oct 14 22:11:15] Set permissions of dup-installer/index.php<br/>
+[Oct 14 22:11:15] Set permissions of dup-installer/main.installer.php<br/>
+[Oct 14 22:11:15] Set permissions of dup-installer/php_error__[HASH].log<br/>
+[Oct 14 22:11:15] DONE: No detected errors so redirecting to the main installer. Main Installer URI = http://159.89.161.178/dup-installer/main.installer.php

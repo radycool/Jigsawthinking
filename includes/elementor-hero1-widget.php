@@ -592,7 +592,7 @@ class Elementor_Hero1_Widget extends \Elementor\Widget_Base {
         $this->add_group_control(
             \Elementor\Group_Control_Border::get_type(),
             [
-                'name' => 'hero1_btn_border',  // Changed from 'button_border'
+                'name' => 'hero1_button_border_unique',  // Changed from 'button_border'
                 'selector' => '{{WRAPPER}} .hero1-button',
             ]
         );
