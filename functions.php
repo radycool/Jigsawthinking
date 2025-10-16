@@ -861,3 +861,7 @@ add_action( 'elementor/widgets/register', function( $widgets_manager ) {
 
 // CSS/JS is inside widget itself
 
+add_action('elementor/widgets/register', function($widgets_manager){
+    $registered = \Elementor\Plugin::instance()->widgets_manager->get_registered_widgets();
+    error_log('Registered Elementor Widgets: ' . implode(', ', array_keys($registered)));
+});
