@@ -1,4 +1,8 @@
 <?php
+error_log('Gallery Widget file path: ' . $file_path);
+error_log('File exists? ' . (file_exists($file_path) ? 'Yes' : 'No'));
+error_log('Class exists? ' . (class_exists("Elementor_Gallery_Widget") ? 'Yes' : 'No'));
+
 // Enqueue parent + child styles
 function hello_elementor_child_enqueue_styles() {
     wp_enqueue_style( 'hello-elementor-style', get_template_directory_uri() . '/style.css' );
